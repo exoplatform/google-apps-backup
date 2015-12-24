@@ -1,0 +1,11 @@
+--- backend.py	2015-12-24 11:15:16.945885716 +0000
++++ backend.py	2015-12-24 11:13:57.877957065 +0000
+@@ -100,7 +100,7 @@
+         self._mkdir(os.path.join(self._session_name, path))
+         prefix = os.path.join(self._current_dir, path)
+         for document_content in document.contents:
+-            path = os.path.join(prefix, document_content.file_name)
++            path = os.path.join(prefix, document_content.file_name.encode('ascii','replace'))
+             Log.debug(u'Writing {}\'s {} to {}'.format(
+                 user.login, document.title, path
+             ))
