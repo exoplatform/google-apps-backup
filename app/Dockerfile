@@ -12,10 +12,13 @@ RUN apt-get update \
     && mkdir /config /data
 
 COPY backend.py.patch /brive/
-RUN cd /brive && patch -p0 < backend.py.patch
+COPY entrypoint.sh /
+RUN cd /brive && patch -p0 < backend.py.patch && chmod u+x /entrypoint.sh
 
 ENV LC_ALL en_US.UTF-8
 
 VOLUME ["/data", "/config"]
 
 WORKDIR /brive
+
+ENTRYPOINT [ "/entrypoint.sh" ]
